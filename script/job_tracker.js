@@ -9,7 +9,7 @@ let interviewJobCount = document.getElementById('interview-job-count');
 let rejectJobCount = document.getElementById('rejected-job-count');
 let availableJobsCount = document.getElementById('available-jobs-count');
 
- 
+
 const allJobCards = document.getElementById('all-cards-container');
 
 
@@ -29,7 +29,7 @@ function jobTrackerCount() {
     rejectJobCount.innerText = rejectedList.length;
 
     const showCards = interviewList.length + rejectedList.length;
-    
+
     availableJobsCount.innerText = `${showCards} of ${allCards} jobs`;
 
 }
@@ -39,169 +39,183 @@ jobTrackerCount();
 
 
 const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-container');
-    jobTrackerBtnContainer.addEventListener('click', function(event) {
-        const jobTrackerBtn = event.target.closest('button');
+jobTrackerBtnContainer.addEventListener('click', function (event) {
+    const jobTrackerBtn = event.target.closest('button');
 
-        if(!jobTrackerBtn){
-            return;
-        } 
+    if (!jobTrackerBtn) {
+        return;
+    }
 
-        const buttons = jobTrackerBtnContainer.querySelectorAll('button');
+    const buttons = jobTrackerBtnContainer.querySelectorAll('button');
 
-        for(let button of buttons) {
-            button.classList.remove('bg-[#3B82F6]','text-white');
-            button.classList.add('bg-white','text-[#64748B]');
+    for (let button of buttons) {
+        button.classList.remove('bg-[#3B82F6]', 'text-white');
+        button.classList.add('bg-white', 'text-[#64748B]');
+    }
+
+    jobTrackerBtn.classList.remove('bg-white', 'text-[#64748B]');
+    jobTrackerBtn.classList.add('bg-[#3B82F6]', 'text-white');
+
+    currentStatus = jobTrackerBtn.id;
+
+    if (currentStatus === 'interview-filter-btn') {
+        allJobCards.classList.add('hidden');
+        filteredJobCard.classList.remove('hidden');
+        renderInterview();
+    } else if (currentStatus === 'all-filter-btn') {
+        allJobCards.classList.remove('hidden');
+        filteredJobCard.classList.add('hidden');
+    } else if (currentStatus === 'rejected-filter-btn') {
+        allJobCards.classList.add('hidden');
+        filteredJobCard.classList.remove('hidden');
+        renderRejected();
+    }
+
+});
+
+
+
+mainContainer.addEventListener('click', function (event) {
+
+    const jobInterviewBtn = event.target.closest('.job-interview-btn');
+    const jobRejectedBtn = event.target.closest('.job-rejected-btn');
+    const deleteBtn = event.target.closest('.delete-btn');
+
+
+    if (jobInterviewBtn) {
+        const jobCard = event.target.closest('.card');
+
+        const companyName = jobCard.querySelector('.company-name').innerText;
+        const jobPosition = jobCard.querySelector('.job-position').innerText;
+        const jobInfo = jobCard.querySelector('.job-info').innerText;
+        const jobStatus = jobCard.querySelector('.job-status').innerText;
+        const jobDescription = jobCard.querySelector('.job-description').innerText;
+
+        jobCard.querySelector('.job-status').innerText = 'INTERVIEW';
+
+        // create object 
+
+        const jobCardInfo = {
+            companyName,
+            jobPosition,
+            jobInfo,
+            jobStatus: 'INTERVIEW',
+            jobDescription
         }
-        
-        jobTrackerBtn.classList.remove('bg-white', 'text-[#64748B]');
-        jobTrackerBtn.classList.add('bg-[#3B82F6]', 'text-white');
 
-        currentStatus = jobTrackerBtn.id;
-        
-        if(currentStatus === 'interview-filter-btn') {
-            allJobCards.classList.add('hidden');
-            filteredJobCard.classList.remove('hidden');
+
+        const hasJobCard = interviewList.find(item => item.companyName === jobCardInfo.companyName);
+
+        if (!hasJobCard) {
+            interviewList.push(jobCardInfo);
+        }
+
+        rejectedList = rejectedList.filter(item => item.companyName !== jobCardInfo.companyName);
+
+
+        if (currentStatus === 'interview-filter-btn') {
             renderInterview();
-        }else if(currentStatus === 'all-filter-btn') {
-            allJobCards.classList.remove('hidden');
-            filteredJobCard.classList.add('hidden');
-        }else if(currentStatus === 'rejected-filter-btn') {
-            allJobCards.classList.add('hidden');
-            filteredJobCard.classList.remove('hidden');
+        } else if (currentStatus === 'rejected-filter-btn') {
             renderRejected();
         }
-        
-    });
 
-    
-
-    mainContainer.addEventListener('click', function(event) {
-
-        const jobInterviewBtn = event.target.closest('.job-interview-btn');
-        const jobRejectedBtn = event.target.closest('.job-rejected-btn');
-        const deleteBtn = event.target.closest('.delete-btn');
-        
-
-        if(jobInterviewBtn) {
-            const jobCard = event.target.closest('.card');
-
-            const companyName = jobCard.querySelector('.company-name').innerText;
-            const jobPosition = jobCard.querySelector('.job-position').innerText;
-            const jobInfo = jobCard.querySelector('.job-info').innerText;
-            const jobStatus = jobCard.querySelector('.job-status').innerText;
-            const jobDescription = jobCard.querySelector('.job-description').innerText;
-
-            jobCard.querySelector('.job-status').innerText = 'INTERVIEW';
-
-            // create object 
-
-            const jobCardInfo = {
-                companyName,
-                jobPosition,
-                jobInfo,
-                jobStatus: 'INTERVIEW',
-                jobDescription
-            }
-
-        
-            const hasJobCard = interviewList.find(item => item.companyName === jobCardInfo.companyName);
-
-            if(!hasJobCard) {
-                interviewList.push(jobCardInfo);
-            }
-
-            rejectedList = rejectedList.filter(item => item.companyName !== jobCardInfo.companyName);
-            
-
-            if(currentStatus === 'interview-filter-btn') {
-                renderInterview();
-            }else if(currentStatus === 'rejected-filter-btn') {
-                renderRejected();
-            }
-
-            jobTrackerCount();
-            
-        
-        }else if(jobRejectedBtn) {
-            const jobCard = event.target.closest('.card');
-
-            const companyName = jobCard.querySelector('.company-name').innerText;
-            const jobPosition = jobCard.querySelector('.job-position').innerText;
-            const jobInfo = jobCard.querySelector('.job-info').innerText;
-            const jobStatus = jobCard.querySelector('.job-status').innerText;
-            const jobDescription = jobCard.querySelector('.job-description').innerText;
-
-            jobCard.querySelector('.job-status').innerText = 'REJECTED';
- 
-
-            const jobCardInfo = {
-                companyName,
-                jobPosition,
-                jobInfo,
-                jobStatus: 'REJECTED',
-                jobDescription
-            }
-
-            
-            const hasJobCard = rejectedList.find(item => item.companyName === jobCardInfo.companyName);
-
-            
-            if(!hasJobCard) {
-                rejectedList.push(jobCardInfo);
-            }
+        jobTrackerCount();
 
 
-            interviewList = interviewList.filter(item => item.companyName !== jobCardInfo.companyName);
+    } else if (jobRejectedBtn) {
+        const jobCard = event.target.closest('.card');
 
-            if(currentStatus === 'interview-filter-btn') {
-                renderInterview();
-            }else if(currentStatus === 'rejected-filter-btn') {
-                renderRejected();
-            }
+        const companyName = jobCard.querySelector('.company-name').innerText;
+        const jobPosition = jobCard.querySelector('.job-position').innerText;
+        const jobInfo = jobCard.querySelector('.job-info').innerText;
+        const jobStatus = jobCard.querySelector('.job-status').innerText;
+        const jobDescription = jobCard.querySelector('.job-description').innerText;
 
-            jobTrackerCount();
-
-        }else if(deleteBtn) {
-            const jobCard = deleteBtn.closest('.card');
-            jobCard.remove();
+        jobCard.querySelector('.job-status').innerText = 'REJECTED';
 
 
-            jobTrackerCount();
-            emptyAllCards();
-        } 
-        
-        function emptyAllCards() {
-            const allCards = allJobCards.querySelectorAll('.card').length;
-            const defaultTemplate = document.getElementById('default-template');
-
-            if(allCards === 0 && currentStatus === 'all-filter-btn') {
-                defaultTemplate.classList.remove('hidden');
-            }else {
-                defaultTemplate.classList.add('hidden');
-            }
-
+        const jobCardInfo = {
+            companyName,
+            jobPosition,
+            jobInfo,
+            jobStatus: 'REJECTED',
+            jobDescription
         }
-    });
 
-    
 
-    function renderInterview() {
-        filteredJobCard.innerHTML = '';
+        const hasJobCard = rejectedList.find(item => item.companyName === jobCardInfo.companyName);
 
+
+        if (!hasJobCard) {
+            rejectedList.push(jobCardInfo);
+        }
+
+
+        interviewList = interviewList.filter(item => item.companyName !== jobCardInfo.companyName);
+
+        if (currentStatus === 'interview-filter-btn') {
+            renderInterview();
+        } else if (currentStatus === 'rejected-filter-btn') {
+            renderRejected();
+        }
+
+        jobTrackerCount();
+
+    } else if (deleteBtn) {
+        const jobCard = deleteBtn.closest('.card');
+        jobCard.remove();
+
+
+        jobTrackerCount();
+        emptyAllCards();
+    }
+
+    function emptyAllCards() {
         const defaultTemplate = document.getElementById('default-template');
 
-        if(interviewList.length === 0) {
-            defaultTemplate.classList.remove('hidden');
-        }else{
-            defaultTemplate.classList.add('hidden');
+        if (currentStatus === 'all-filter-btn') {
+            const allCards = allJobCards.querySelectorAll('.card').length;
+            if (allCards === 0) {
+                defaultTemplate.classList.remove('hidden');
+            } else {
+                defaultTemplate.classList.add('hidden');
+            }
+        } else if (currentStatus === 'interview-filter-btn') {
+            if (interviewList.length === 0) {
+                defaultTemplate.classList.remove('hidden');
+            } else {
+                defaultTemplate.classList.add('hidden');
+            }
+        } else if (currentStatus === 'rejected-filter-btn') {
+            if (rejectedList.length === 0) {
+                defaultTemplate.classList.remove('hidden');
+            } else {
+                defaultTemplate.classList.add('hidden');
+            }
         }
-        
+    }
 
-        for(let interview of interviewList) {
-            let div = document.createElement('div');
-            div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6";
+});
 
-            div.innerHTML = `
+
+
+function renderInterview() {
+    filteredJobCard.innerHTML = '';
+
+    const defaultTemplate = document.getElementById('default-template');
+
+    if (interviewList.length === 0) {
+        defaultTemplate.classList.remove('hidden');
+    } else {
+        defaultTemplate.classList.add('hidden');
+    }
+
+
+    for (let interview of interviewList) {
+        let div = document.createElement('div');
+        div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6";
+
+        div.innerHTML = `
                 <div class="left-side">
                         <div class="mb-5">
                             <h3 class="company-name  text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">${interview.companyName}</h3>
@@ -228,28 +242,28 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
                     </div>
             `;
 
-            filteredJobCard.appendChild(div);
-            
-        }
+        filteredJobCard.appendChild(div);
 
     }
 
-    function renderRejected() {
-        filteredJobCard.innerHTML = '';
+}
 
-        const defaultTemplate = document.getElementById('default-template');
-        
-        if(rejectedList.length === 0) {
-             defaultTemplate.classList.remove('hidden');
-        }else {
-            defaultTemplate.classList.add('hidden');
-        }
+function renderRejected() {
+    filteredJobCard.innerHTML = '';
 
-        for(let rejected of rejectedList) {
-            let div = document.createElement('div');
-            div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6";
+    const defaultTemplate = document.getElementById('default-template');
 
-            div.innerHTML = `
+    if (rejectedList.length === 0) {
+        defaultTemplate.classList.remove('hidden');
+    } else {
+        defaultTemplate.classList.add('hidden');
+    }
+
+    for (let rejected of rejectedList) {
+        let div = document.createElement('div');
+        div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6";
+
+        div.innerHTML = `
                 <div class="left-side">
                         <div class="mb-5">
                             <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">${rejected.companyName}</h3>
@@ -276,38 +290,38 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
                     </div>
             `;
 
-            filteredJobCard.appendChild(div);
-        }
-
-        
+        filteredJobCard.appendChild(div);
     }
 
-     filteredJobCard.addEventListener('click', function(event) {
-        const deleteBtn = event.target.closest('.delete-btn');
-            if(!deleteBtn) {
-                return;
-            }
 
-            const card = deleteBtn.closest('.card');
-            const companyName = card.querySelector('.company-name').innerText;
-            
-        
-            interviewList = interviewList.filter(item => item.companyName !== companyName);
+}
 
-            rejectedList = rejectedList.filter(item => item.companyName !== companyName);
+filteredJobCard.addEventListener('click', function (event) {
+    const deleteBtn = event.target.closest('.delete-btn');
+    if (!deleteBtn) {
+        return;
+    }
 
-            if(currentStatus === 'interview-filter-btn') {
-                renderInterview();
-            }else if (currentStatus === 'rejected-filter-btn') {
-                renderRejected();
-            }
-                
-            jobTrackerCount();        
-            
-            
-        });
+    const card = deleteBtn.closest('.card');
+    const companyName = card.querySelector('.company-name').innerText;
 
-   
 
-    
+    interviewList = interviewList.filter(item => item.companyName !== companyName);
+
+    rejectedList = rejectedList.filter(item => item.companyName !== companyName);
+
+    if (currentStatus === 'interview-filter-btn') {
+        renderInterview();
+    } else if (currentStatus === 'rejected-filter-btn') {
+        renderRejected();
+    }
+
+    jobTrackerCount();
+
+
+});
+
+
+
+
 
