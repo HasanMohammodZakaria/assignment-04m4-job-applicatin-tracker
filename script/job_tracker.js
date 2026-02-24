@@ -7,7 +7,7 @@ let currentStatus = 'all-filter-btn';
 let totalJobCount = document.getElementById('total-job-count');
 let interviewJobCount = document.getElementById('interview-job-count');
 let rejectJobCount = document.getElementById('rejected-job-count');
-let availableJobs = document.getElementById('available-jobs');
+let availableJobsCount = document.getElementById('available-jobs-count');
 
 // get all job cards 
 const allJobCards = document.getElementById('all-cards-container');
@@ -21,12 +21,26 @@ const mainContainer = document.querySelector('main');
 // create all job count function
 
 function jobTrackerCount() {
-    totalJobCount.innerText = allJobCards.children.length;
+    // totalJobCount.innerText = allJobCards.children.length;
+    const totalSystem = document.querySelectorAll('.card').length;
+    console.log(totalSystem);
     interviewJobCount.innerText = interviewList.length;
     rejectJobCount.innerText = rejectedList.length;
+
+    if(currentStatus === 'all-filter-btn') {
+        totalJobCount.innerText = totalSystem;
+        availableJobsCount.innerText = `${totalSystem} jobs`;
+    }else {
+        const showCards = document.getElementById('all-cards-container').children.length;
+        totalJobCount.innerText = totalSystem;
+        availableJobsCount.innerText = `${showCards} of ${totalSystem} jobs`;
+    }
+
 }
 
 jobTrackerCount();
+
+
 
 // job tracker toggle btn style (event delegation)
 
@@ -62,7 +76,10 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
             filteredJobCard.classList.remove('hidden');
             renderRejected();
         }
+        
     });
+
+    
 
     // create job card for filtering (event delegation)
 
@@ -260,6 +277,31 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
 
         
     }
+
+     filteredJobCard.addEventListener('click', function(event) {
+        const deleteBtn = event.target.closest('.delete-btn');
+            if(!deleteBtn) {
+                return;
+            }
+
+            const card = deleteBtn.closest('.card');
+            const companyName = card.querySelector('.company-name').innerText;
+            
+        
+            interviewList = interviewList.filter(item => item.companyName !== companyName);
+
+            rejectedList = rejectedList.filter(item => item.companyName !== companyName);
+
+            if(currentStatus === 'interview-filter-btn') {
+                renderInterview();
+            }else if (currentStatus === 'rejected-filter-btn') {
+                renderRejected();
+            }
+                
+            jobTrackerCount();        
+            
+            
+        });
 
    
 
