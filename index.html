@@ -30,9 +30,9 @@
 <body class="my-15 bg-[#F8FAFC]"">
 
     <!-- Header section Layout -->
-   <header class=" w-[80%] mx-auto">
-    <h1 class="lg:title text-4xl text-[#002C5C] font-bold my-6">Job Application Tracker</h1>
-        <section class="job-tracker-section grid grid-cols-3 gap-4">
+   <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="title text-2xl sm:text-3xl lg:text-4xl text-[#002C5C] font-bold my-6">Job Application Tracker</h1>
+        <section class="job-tracker-section  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="total-job-tracker bg-white p-5 rounded-xl inset-shadow-2xs">
                 <p class="text-[#323B49] text-[1rem] font-medium mb-2">Total</p>
                 <h2 id="total-job-count" class="text-2xl text-[#002C5C] font-extrabold">0</h2>
@@ -49,12 +49,16 @@
             </div>
         </section>
     </header>
-    <hr class="w-[80%] mx-auto mt-8 text-gray-300">
+
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <hr class="mt-8 border-gray-300">
+    </div>
+
 
     <main>
 
         <!-- Jobs btn section -->
-        <section class="jobs-btn-section w-[80%] mx-auto my-10">
+        <section class="jobs-btn-section w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
             <div class="job-head-container flex justify-between mb-6">
                 <h3 class="text-xl text-[#002C5C] font-semibold">Available Jobs</h3>
                 <p id="available-jobs-count" class="text-[1rem] text-[#64748B] font-medium ">0 jobs</p>
@@ -75,15 +79,15 @@
        
 
         <!-- cards section -->
-         <section class="cards-section w-[80%] mx-auto">
+         <section class="cards-section w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div id="all-cards-container" class="space-y-7">
 
                 <!-- card 01 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                            <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">Mobile First Corp</h3>
+                            <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">Mobile First Corp</h3>
 
                             <p class="job-position text-[#64748B] text-1rem ">React Native Developer</p>
                         </div>
@@ -107,10 +111,10 @@
                     </div>
                 </div>
                 <!-- card 02 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                        <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">WebFlow Agency</h3>
+                        <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">WebFlow Agency</h3>
 
                         <p class="job-position text-[#64748B] text-1rem ">Web Designer & Developer</p>
                         </div>
@@ -133,10 +137,10 @@
                     </div>
                 </div>
                 <!-- card 03 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                        <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">DataViz Solutions</h3>
+                        <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">DataViz Solutions</h3>
 
                         <p class="job-position text-[#64748B] text-1rem ">Data Visualization Specialist</p>
                         </div>
@@ -157,10 +161,10 @@
                     </div>
                 </div>
                 <!-- card 04 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                        <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">CloudFirst Inc</h3>
+                        <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">CloudFirst Inc</h3>
 
                         <p class="job-position text-[#64748B] text-1rem ">Backend Developer</p>
                         </div>
@@ -181,10 +185,10 @@
                     </div>
                 </div>
                 <!-- card 05 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                        <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">Innovation Labs</h3>
+                        <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">Innovation Labs</h3>
 
                         <p class="job-position text-[#64748B] text-1rem ">UI/UX Engineer</p>
                         </div>
@@ -205,10 +209,10 @@
                     </div>
                 </div>
                 <!-- card 06 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                        <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">MegaCorp Solutions</h3>
+                        <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">MegaCorp Solutions</h3>
 
                         <p class="job-position text-[#64748B] text-1rem ">JavaScript Developer</p>
                         </div>
@@ -229,10 +233,10 @@
                     </div>
                 </div>
                 <!-- card 07 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                        <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">StartupXYZ</h3>
+                        <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">StartupXYZ</h3>
 
                         <p class="job-position text-[#64748B] text-1rem ">Full Stack Engineer</p>
                         </div>
@@ -253,10 +257,10 @@
                     </div>
                 </div>
                 <!-- card 08 -->
-                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between">
+                <div class="card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6">
                     <div class="left-side">
                         <div class="mb-5">
-                        <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">TechCorp Industries</h3>
+                        <h3 class="company-name text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">TechCorp Industries</h3>
 
                         <p class="job-position text-[#64748B] text-1rem ">Senior Frontend Developer</p>
                         </div>
@@ -282,14 +286,14 @@
          </section>
 
         <!-- filtered card -->
-        <section class="filtered-job-card-section w-[80%] mx-auto ">
+        <section class="filtered-job-card-section w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="filtered-job-cards" class=" space-y-7 hidden">
 
             </div>
         </section>
 
         <!-- default template section -->
-         <section class="default-template-section w-[80%] mx-auto">
+         <section class="default-template-section w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="default-template" class=" space-y-7  hidden">
                 <div class="template-card bg-white flex flex-col justify-center items-center text-center inset-shadow-2xs rounded-lg py-20">
                     <img src="./images/doc-icon.png" alt="" class="max-w-[75px] ">

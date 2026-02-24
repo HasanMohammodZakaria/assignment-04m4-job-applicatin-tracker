@@ -21,26 +21,23 @@ const mainContainer = document.querySelector('main');
 // create all job count function
 
 function jobTrackerCount() {
-    // totalJobCount.innerText = allJobCards.children.length;
-    const totalSystem = document.querySelectorAll('.card').length;
-    console.log(totalSystem);
+
+    const allCards = document.querySelectorAll('.card');
+    totalJobCount.innerText = allCards.length;
+
     interviewJobCount.innerText = interviewList.length;
     rejectJobCount.innerText = rejectedList.length;
 
     if(currentStatus === 'all-filter-btn') {
-        totalJobCount.innerText = totalSystem;
-        availableJobsCount.innerText = `${totalSystem} jobs`;
+        availableJobsCount.innerText = `${allCards.length} jobs`;
     }else {
-        const showCards = document.getElementById('all-cards-container').children.length;
-        totalJobCount.innerText = totalSystem;
-        availableJobsCount.innerText = `${showCards} of ${totalSystem} jobs`;
+        const showCards = document.querySelectorAll('.card:not(.hidden)').length;
+        availableJobsCount.innerText = `${showCards} of ${allCards.length}Jobs`;
     }
 
 }
 
 jobTrackerCount();
-
-
 
 // job tracker toggle btn style (event delegation)
 
@@ -195,12 +192,12 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
 
         for(let interview of interviewList) {
             let div = document.createElement('div');
-            div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between";
+            div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6";
 
             div.innerHTML = `
                 <div class="left-side">
                         <div class="mb-5">
-                            <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">${interview.companyName}</h3>
+                            <h3 class="company-name  text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">${interview.companyName}</h3>
 
                             <p class="job-position text-[#64748B] text-1rem ">${interview.jobPosition}</p>
                         </div>
@@ -243,12 +240,12 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
 
         for(let rejected of rejectedList) {
             let div = document.createElement('div');
-            div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex justify-between";
+            div.className = "card bg-white p-6 inset-shadow-2xs rounded-lg flex lg:flex-row justify-between gap-6";
 
             div.innerHTML = `
                 <div class="left-side">
                         <div class="mb-5">
-                            <h3 class="company-name text-[18px] text-[#002C5C] font-medium mb-2">${rejected.companyName}</h3>
+                            <h3 class="company-name  text-base sm:text-lg lg:text-xl text-[#002C5C] font-medium mb-2">${rejected.companyName}</h3>
 
                             <p class="job-position text-[#64748B] text-1rem ">${rejected.jobPosition}</p>
                         </div>
