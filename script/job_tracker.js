@@ -1,24 +1,24 @@
-// create variable
+
 let interviewList = [];
 let rejectedList = [];
 let currentStatus = 'all-filter-btn';
 
-// get all count 
+
 let totalJobCount = document.getElementById('total-job-count');
 let interviewJobCount = document.getElementById('interview-job-count');
 let rejectJobCount = document.getElementById('rejected-job-count');
 let availableJobsCount = document.getElementById('available-jobs-count');
 
-// get all job cards 
+ 
 const allJobCards = document.getElementById('all-cards-container');
 
-// get filtered job cards 
+
 const filteredJobCard = document.getElementById('filtered-job-cards');
 
 // get main container
 const mainContainer = document.querySelector('main');
 
-// create all job count function
+
 
 function jobTrackerCount() {
 
@@ -36,7 +36,7 @@ function jobTrackerCount() {
 
 jobTrackerCount();
 
-// job tracker toggle btn style (event delegation)
+
 
 const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-container');
     jobTrackerBtnContainer.addEventListener('click', function(event) {
@@ -75,8 +75,6 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
 
     
 
-    // create job card for filtering (event delegation)
-
     mainContainer.addEventListener('click', function(event) {
 
         const jobInterviewBtn = event.target.closest('.job-interview-btn');
@@ -105,7 +103,7 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
                 jobDescription
             }
 
-            // check has job card in interviewList
+        
             const hasJobCard = interviewList.find(item => item.companyName === jobCardInfo.companyName);
 
             if(!hasJobCard) {
@@ -134,8 +132,7 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
             const jobDescription = jobCard.querySelector('.job-description').innerText;
 
             jobCard.querySelector('.job-status').innerText = 'REJECTED';
-
-            // create object 
+ 
 
             const jobCardInfo = {
                 companyName,
@@ -145,10 +142,10 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
                 jobDescription
             }
 
-            // check has job card in rejectedList
+            
             const hasJobCard = rejectedList.find(item => item.companyName === jobCardInfo.companyName);
 
-            // check no duplicate card add again
+            
             if(!hasJobCard) {
                 rejectedList.push(jobCardInfo);
             }
@@ -173,7 +170,7 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
         }   
     });
 
-    // job card rendering 
+    
 
     function renderInterview() {
         filteredJobCard.innerHTML = '';
