@@ -22,18 +22,15 @@ const mainContainer = document.querySelector('main');
 
 function jobTrackerCount() {
 
-    const allCards = document.querySelectorAll('.card');
-    totalJobCount.innerText = allCards.length;
+    const allCards = allJobCards.querySelectorAll('.card').length;
+    totalJobCount.innerText = allCards;
 
     interviewJobCount.innerText = interviewList.length;
     rejectJobCount.innerText = rejectedList.length;
 
-    if(currentStatus === 'all-filter-btn') {
-        availableJobsCount.innerText = `${allCards.length} jobs`;
-    }else {
-        const showCards = document.querySelectorAll('.card:not(.hidden)').length;
-        availableJobsCount.innerText = `${showCards} of ${allCards.length}Jobs`;
-    }
+    const showCards = interviewList.length + rejectedList.length;
+    
+    availableJobsCount.innerText = `${showCards} of ${allCards} jobs`;
 
 }
 
