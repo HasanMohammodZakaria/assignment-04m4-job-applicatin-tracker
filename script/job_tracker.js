@@ -167,7 +167,20 @@ const jobTrackerBtnContainer = document.querySelector('.job-tracker-btn-containe
 
 
             jobTrackerCount();
-        }   
+            emptyAllCards();
+        } 
+        
+        function emptyAllCards() {
+            const allCards = allJobCards.querySelectorAll('.card').length;
+            const defaultTemplate = document.getElementById('default-template');
+
+            if(allCards === 0 && currentStatus === 'all-filter-btn') {
+                defaultTemplate.classList.remove('hidden');
+            }else {
+                defaultTemplate.classList.add('hidden');
+            }
+
+        }
     });
 
     
